@@ -1,0 +1,34 @@
+Como pode ser visto, esse tipo de busca é muito complexa. Ela é de complexidade O(2**n). Ela vai comparando um por um para achar qual a melhor combinação.
+
+Isso é muito nítido quando levamos em conta arquivos de entrada maiores, como o in5.txt, que tem 28 linhas. O tempo de execução é muito maior, e isso é um problema que 
+vai aumentando muito conforme o tamanho do arquivo aumenta.
+
+Essa é a saída do programa para o in5.txt:
+
+Arquivo: in1.txt
+Valor máximo que pode ser carregado: 266
+Peso total dos itens escolhidos: 10 kg
+Tempo de execução: 6 µs
+
+Arquivo: in2.txt
+Valor máximo que pode ser carregado: 156
+Peso total dos itens escolhidos: 2 kg
+Tempo de execução: 0 µs
+
+Arquivo: in3.txt
+Valor máximo que pode ser carregado: 236
+Peso total dos itens escolhidos: 95 kg
+Tempo de execução: 8 µs
+
+Arquivo: in4.txt
+Valor máximo que pode ser carregado: 55
+Peso total dos itens escolhidos: 10 kg
+Tempo de execução: 1 µs
+
+Arquivo: in5.txt
+Valor máximo que pode ser carregado: 774
+Peso total dos itens escolhidos: 80 kg
+Tempo de execução: 11903 µs
+
+
+A diferença é MUITO grande.

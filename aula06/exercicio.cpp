@@ -2,8 +2,10 @@
 #include <vector>
 #include <fstream>
 #include <string>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 struct Result {
     int maxValue;
@@ -48,15 +50,21 @@ void processFile(const string& filename) {
         infile >> weights[i] >> values[i];
     }
 
+    auto start = high_resolution_clock::now();
+
     Result result = knapsack(W, weights, values, N);
+
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(end - start);
 
     cout << "Arquivo: " << filename << endl;
     cout << "Valor máximo que pode ser carregado: " << result.maxValue << endl;
-    cout << "Peso total dos itens escolhidos: " << result.totalWeight << " kg" << endl << endl;
+    cout << "Peso total dos itens escolhidos: " << result.totalWeight << " kg" << endl;
+    cout << "Tempo de execução: " << duration.count() << " µs" << endl << endl;
 }
 
 int main() {
-    vector<string> filenames = {"in1.txt", "in2.txt", "in3.txt", "in4.txt"};
+    vector<string> filenames = {"in1.txt", "in2.txt", "in3.txt", "in4.txt", "in5.txt"};
 
     for (const auto& filename : filenames) {
         processFile(filename);
