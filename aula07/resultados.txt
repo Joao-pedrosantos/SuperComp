@@ -1,229 +1,230 @@
-Arquivo de entrada: entrada1.txt
-Numero de combinacoes: 24974
-Metodo Exaustivo:
-Valor total: 601
-Peso total: 373
-Tempo de execucao: 9653100 ns
+Input File: entrada1.txt
+Number of Combinations: 24974
+Exhaustive Method Results:
+Total Value: 601
+Total Weight: 373
+Execution Time: 15117500 ns
 
-Metodo Embaralhar e Preencher - Execucao 1:
-Valor total: 228
-Peso total: 362
-Tempo de execucao: 400 ns
+Shuffle and Fill Method - Iteration 1:
+Total Value: 288
+Total Weight: 380
+Execution Time: 500 ns
 
-Metodo Embaralhar e Preencher - Execucao 2:
-Valor total: 298
-Peso total: 366
-Tempo de execucao: 400 ns
+Shuffle and Fill Method - Iteration 2:
+Total Value: 251
+Total Weight: 379
+Execution Time: 600 ns
 
-Metodo Embaralhar e Preencher - Execucao 3:
-Valor total: 339
-Peso total: 364
-Tempo de execucao: 400 ns
+Shuffle and Fill Method - Iteration 3:
+Total Value: 394
+Total Weight: 367
+Execution Time: 300 ns
 
-Metodo Embaralhar e Preencher - Execucao 4:
-Valor total: 283
-Peso total: 374
-Tempo de execucao: 400 ns
+Shuffle and Fill Method - Iteration 4:
+Total Value: 235
+Total Weight: 366
+Execution Time: 500 ns
 
-Metodo Embaralhar e Preencher - Execucao 5:
-Valor total: 304
-Peso total: 379
-Tempo de execucao: 400 ns
+Shuffle and Fill Method - Iteration 5:
+Total Value: 311
+Total Weight: 373
+Execution Time: 300 ns
 
-Metodo Selecao Aleatoria - Execucao 1:
-Valor total: 374
-Peso total: 378
-Tempo de execucao: 3600 ns
+Random Selection Method - Iteration 1:
+Total Value: 315
+Total Weight: 374
+Execution Time: 3000 ns
 
-Metodo Selecao Aleatoria - Execucao 2:
-Valor total: 345
-Peso total: 380
-Tempo de execucao: 3400 ns
+Random Selection Method - Iteration 2:
+Total Value: 290
+Total Weight: 365
+Execution Time: 3000 ns
 
-Metodo Selecao Aleatoria - Execucao 3:
-Valor total: 283
-Peso total: 374
-Tempo de execucao: 3700 ns
+Random Selection Method - Iteration 3:
+Total Value: 273
+Total Weight: 372
+Execution Time: 3700 ns
 
-Metodo Selecao Aleatoria - Execucao 4:
-Valor total: 281
-Peso total: 359
-Tempo de execucao: 6300 ns
+Random Selection Method - Iteration 4:
+Total Value: 343
+Total Weight: 375
+Execution Time: 12500 ns
 
-Metodo Selecao Aleatoria - Execucao 5:
-Valor total: 244
-Peso total: 358
-Tempo de execucao: 2900 ns
+Random Selection Method - Iteration 5:
+Total Value: 328
+Total Weight: 380
+Execution Time: 2800 ns
 
+--------------------------------------------------
+Input File: entrada2.txt
+Number of Combinations: 27638
+Exhaustive Method Results:
+Total Value: 870
+Total Weight: 239
+Execution Time: 8691800 ns
 
+Shuffle and Fill Method - Iteration 1:
+Total Value: 282
+Total Weight: 234
+Execution Time: 500 ns
 
-Arquivo de entrada: entrada2.txt
-Numero de combinacoes: 27638
-Metodo Exaustivo:
-Valor total: 870
-Peso total: 239
-Tempo de execucao: 11554800 ns
+Shuffle and Fill Method - Iteration 2:
+Total Value: 232
+Total Weight: 238
+Execution Time: 700 ns
 
-Metodo Embaralhar e Preencher - Execucao 1:
-Valor total: 245
-Peso total: 238
-Tempo de execucao: 900 ns
+Shuffle and Fill Method - Iteration 3:
+Total Value: 254
+Total Weight: 236
+Execution Time: 600 ns
 
-Metodo Embaralhar e Preencher - Execucao 2:
-Valor total: 109
-Peso total: 239
-Tempo de execucao: 600 ns
+Shuffle and Fill Method - Iteration 4:
+Total Value: 305
+Total Weight: 233
+Execution Time: 800 ns
 
-Metodo Embaralhar e Preencher - Execucao 3:
-Valor total: 221
-Peso total: 236
-Tempo de execucao: 500 ns
+Shuffle and Fill Method - Iteration 5:
+Total Value: 478
+Total Weight: 236
+Execution Time: 600 ns
 
-Metodo Embaralhar e Preencher - Execucao 4:
-Valor total: 198
-Peso total: 237
-Tempo de execucao: 500 ns
+Random Selection Method - Iteration 1:
+Total Value: 192
+Total Weight: 235
+Execution Time: 5100 ns
 
-Metodo Embaralhar e Preencher - Execucao 5:
-Valor total: 231
-Peso total: 236
-Tempo de execucao: 800 ns
-Peso total: 239
-Tempo de execucao: 4200 ns
+Random Selection Method - Iteration 2:
+Total Value: 357
+Total Weight: 236
+Execution Time: 8300 ns
 
-Metodo Selecao Aleatoria - Execucao 2:
-Valor total: 304
-Peso total: 238
-Tempo de execucao: 7600 ns
+Random Selection Method - Iteration 3:
+Total Value: 402
+Total Weight: 236
+Execution Time: 4300 ns
 
-Metodo Selecao Aleatoria - Execucao 3:
-Valor total: 261
-Peso total: 234
-Tempo de execucao: 4200 ns
+Random Selection Method - Iteration 4:
+Total Value: 388
+Total Weight: 237
+Execution Time: 4200 ns
 
-Metodo Selecao Aleatoria - Execucao 4:
-Valor total: 204
-Peso total: 229
-Tempo de execucao: 4100 ns
+Random Selection Method - Iteration 5:
+Total Value: 217
+Total Weight: 239
+Execution Time: 4100 ns
 
-Metodo Selecao Aleatoria - Execucao 5:
-Valor total: 262
-Peso total: 238
-Tempo de execucao: 4200 ns
+--------------------------------------------------
+Input File: entrada3.txt
+Number of Combinations: 26479
+Exhaustive Method Results:
+Total Value: 3320
+Total Weight: 405
+Execution Time: 8103600 ns
 
+Shuffle and Fill Method - Iteration 1:
+Total Value: 3320
+Total Weight: 405
+Execution Time: 700 ns
 
-Arquivo de entrada: entrada3.txt
-Numero de combinacoes: 26479
-Metodo Exaustivo:
-Valor total: 3320
-Peso total: 405
-Tempo de execucao: 11080200 ns
+Shuffle and Fill Method - Iteration 2:
+Total Value: 3320
+Total Weight: 405
+Execution Time: 1000 ns
 
-Metodo Embaralhar e Preencher - Execucao 1:
-Valor total: 3320
-Peso total: 405
-Tempo de execucao: 1000 ns
+Shuffle and Fill Method - Iteration 3:
+Total Value: 3320
+Total Weight: 405
+Execution Time: 700 ns
 
-Metodo Embaralhar e Preencher - Execucao 2:
-Valor total: 3320
-Peso total: 405
-Tempo de execucao: 800 ns
+Shuffle and Fill Method - Iteration 4:
+Total Value: 3320
+Total Weight: 405
+Execution Time: 700 ns
 
-Metodo Embaralhar e Preencher - Execucao 3:
-Valor total: 3320
-Peso total: 405
-Tempo de execucao: 600 ns
+Shuffle and Fill Method - Iteration 5:
+Total Value: 3320
+Total Weight: 405
+Execution Time: 1100 ns
 
-Metodo Embaralhar e Preencher - Execucao 4:
-Valor total: 3320
-Peso total: 405
-Tempo de execucao: 700 ns
+Random Selection Method - Iteration 1:
+Total Value: 1553
+Total Weight: 184
+Execution Time: 4000 ns
 
-Metodo Embaralhar e Preencher - Execucao 5:
-Valor total: 3320
-Peso total: 405
-Tempo de execucao: 700 ns
+Random Selection Method - Iteration 2:
+Total Value: 1382
+Total Weight: 176
+Execution Time: 4000 ns
 
-Metodo Selecao Aleatoria - Execucao 1:
-Valor total: 1585
-Peso total: 184
-Tempo de execucao: 3900 ns
+Random Selection Method - Iteration 3:
+Total Value: 1739
+Total Weight: 210
+Execution Time: 7500 ns
 
-Metodo Selecao Aleatoria - Execucao 2:
-Valor total: 1640
-Peso total: 209
-Tempo de execucao: 3700 ns
+Random Selection Method - Iteration 4:
+Total Value: 1243
+Total Weight: 144
+Execution Time: 4700 ns
 
-Metodo Selecao Aleatoria - Execucao 3:
-Valor total: 1614
-Peso total: 206
-Tempo de execucao: 7200 ns
+Random Selection Method - Iteration 5:
+Total Value: 1686
+Total Weight: 187
+Execution Time: 3800 ns
 
-Metodo Selecao Aleatoria - Execucao 4:
-Valor total: 1532
-Peso total: 191
-Tempo de execucao: 3700 ns
+--------------------------------------------------
+Input File: entrada4.txt
+Number of Combinations: 21254
+Exhaustive Method Results:
+Total Value: 648
+Total Weight: 600
+Execution Time: 6141100 ns
 
-Metodo Selecao Aleatoria - Execucao 5:
-Valor total: 1543
-Peso total: 218
-Tempo de execucao: 3800 ns
+Shuffle and Fill Method - Iteration 1:
+Total Value: 511
+Total Weight: 598
+Execution Time: 400 ns
 
+Shuffle and Fill Method - Iteration 2:
+Total Value: 538
+Total Weight: 599
+Execution Time: 400 ns
 
+Shuffle and Fill Method - Iteration 3:
+Total Value: 584
+Total Weight: 596
+Execution Time: 500 ns
 
-Arquivo de entrada: entrada4.txt
-Numero de combinacoes: 21254
-Metodo Exaustivo:
-Valor total: 648
-Peso total: 600
-Tempo de execucao: 9444200 ns
+Shuffle and Fill Method - Iteration 4:
+Total Value: 509
+Total Weight: 600
+Execution Time: 400 ns
 
-Metodo Embaralhar e Preencher - Execucao 1:
-Valor total: 526
-Peso total: 598
-Tempo de execucao: 400 ns
+Shuffle and Fill Method - Iteration 5:
+Total Value: 499
+Total Weight: 596
+Execution Time: 400 ns
 
-Metodo Embaralhar e Preencher - Execucao 2:
-Valor total: 484
-Peso total: 595
-Tempo de execucao: 400 ns
+Random Selection Method - Iteration 1:
+Total Value: 361
+Total Weight: 424
+Execution Time: 1900 ns
 
-Metodo Embaralhar e Preencher - Execucao 3:
-Valor total: 533
-Peso total: 595
-Tempo de execucao: 400 ns
+Random Selection Method - Iteration 2:
+Total Value: 365
+Total Weight: 400
+Execution Time: 2300 ns
 
-Metodo Embaralhar e Preencher - Execucao 4:
-Valor total: 508
-Peso total: 597
-Tempo de execucao: 400 ns
+Random Selection Method - Iteration 3:
+Total Value: 431
+Total Weight: 517
+Execution Time: 2000 ns
 
-Metodo Embaralhar e Preencher - Execucao 5:
-Valor total: 453
-Peso total: 597
-Tempo de execucao: 300 ns
+Random Selection Method - Iteration 4:
+Total Value: 364
+Total Weight: 505
+Execution Time: 2300 ns
 
-Metodo Selecao Aleatoria - Execucao 1:
-Valor total: 449
-Peso total: 487
-Tempo de execucao: 1800 ns
-
-Metodo Selecao Aleatoria - Execucao 2:
-Valor total: 394
-Peso total: 597
-Tempo de execucao: 2000 ns
-
-Metodo Selecao Aleatoria - Execucao 3:
-Valor total: 348
-Peso total: 600
-Tempo de execucao: 1900 ns
-
-Metodo Selecao Aleatoria - Execucao 4:
-Valor total: 360
-Peso total: 539
-Tempo de execucao: 2400 ns
-
-Metodo Selecao Aleatoria - Execucao 5:
-Valor total: 478
-Peso total: 600
-Tempo de execucao: 2500 ns
+Random Selection Method - Iteration 5:
+Total Value: 281
+Total Weight: 342
+Execution Time: 1900 ns
