@@ -1,191 +1,218 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
-#include <algorithm>    // std::shuffle, std::max
-#include <random>       // std::default_random_engine
-#include <chrono>       // Para medir o tempo de execução
-#include <fstream>      // Para ler arquivos
-#include <string>       // Para manipular strings
-#include <sstream>      // Para parse de strings
+#include <algorithm>
+#include <cstdlib>
+#include <ctime>
+#include <string>
+#include <random>
 
+// Definição de uma estrutura para armazenar os itens
 struct Item {
     int peso;
     int valor;
 };
 
-// Função para ler itens de um arquivo
-bool lerItensDoArquivo(const std::string& nomeArquivo, std::vector<Item>& itens, int& capacidadeMochila) {
-    std::ifstream arquivo(nomeArquivo);
-    if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo: " << nomeArquivo << std::endl;
-        return false;
-    }
-
-    itens.clear();
-    capacidadeMochila = 0;
-
-    std::string linha;
-    while (std::getline(arquivo, linha)) {
-        // Ignora linhas vazias
-        if (linha.empty()) continue;
-
-        std::istringstream iss(linha);
-        int peso, valor;
-        if (!(iss >> peso >> valor)) {
-            std::cerr << "Formato inválido no arquivo: " << nomeArquivo << " Linha: " << linha << std::endl;
-            return false;
+// Função para calcular o valor total dos itens na mochila
+int calculaValor(const std::vector<Item>& itens, const std::vector<bool>& mochila) {
+    int valorTotal = 0;
+    for (size_t i = 0; i < itens.size(); ++i) {
+        if (mochila[i]) {
+            valorTotal += itens[i].valor;
         }
-        itens.push_back(Item{peso, valor});
     }
+    return valorTotal;
+}
 
-    arquivo.close();
-
-    // Defina a capacidade da mochila
-    // Aqui, você pode definir uma capacidade fixa ou determinar com base nos dados
-    // Para este exemplo, vamos definir como 50% do peso total disponível
+// Função para calcular o peso total dos itens na mochila
+int calculaPeso(const std::vector<Item>& itens, const std::vector<bool>& mochila) {
     int pesoTotal = 0;
-    for (const auto& item : itens) {
-        pesoTotal += item.peso;
-    }
-    capacidadeMochila = pesoTotal / 2;
-
-    return true;
-}
-
-// Heurística 1: Embaralhar e Preencher a Mochila
-int shuffleAndFillKnapsack(std::vector<Item> itens, int maxWeight) {
-    // Embaralha os itens
-    std::random_device rd;
-    std::default_random_engine rng(rd());
-    std::shuffle(itens.begin(), itens.end(), rng);
-
-    int totalPeso = 0;
-    int totalValor = 0;
-
-    for (const auto& item : itens) {
-        if (totalPeso + item.peso <= maxWeight) {
-            totalPeso += item.peso;
-            totalValor += item.valor;
+    for (size_t i = 0; i < itens.size(); ++i) {
+        if (mochila[i]) {
+            pesoTotal += itens[i].peso;
         }
     }
-    return totalValor;
+    return pesoTotal;
 }
 
-// Heurística 2: Seleção Aleatória Baseada em Probabilidade
-int probabilisticSelectionKnapsack(const std::vector<Item>& itens, int maxWeight, double threshold) {
-    std::random_device rd;
-    std::default_random_engine rng(rd());
-    std::uniform_real_distribution<double> dist(0.0, 1.0);
+// Função para gerar uma solução aleatória
+std::vector<bool> geraSolucaoAleatoria(const std::vector<Item>& itens, int capacidade) {
+    std::vector<bool> solucao(itens.size(), false);
+    int pesoAtual = 0;
 
-    int totalPeso = 0;
-    int totalValor = 0;
-
-    for (const auto& item : itens) {
-        double prob = dist(rng);
-        if (prob > threshold && totalPeso + item.peso <= maxWeight) {
-            totalPeso += item.peso;
-            totalValor += item.valor;
+    for (size_t i = 0; i < itens.size(); ++i) {
+        if (pesoAtual + itens[i].peso <= capacidade) {
+            solucao[i] = (rand() % 2 == 1); // Escolhe aleatoriamente se o item será incluído
+            if (solucao[i]) {
+                pesoAtual += itens[i].peso;
+            }
         }
     }
-    return totalValor;
+    return solucao;
 }
 
-// Método de Busca Exaustiva (Recursivo)
-int buscaExaustiva(const std::vector<Item>& itens, int n, int maxWeight, int indice = 0, int pesoAtual = 0, int valorAtual = 0) {
-    if (indice == n) {
-        return valorAtual;
+// Implementação da heurística "Embaralhar e Preencher a Mochila"
+std::vector<bool> heuristicaEmbaralhar(const std::vector<Item>& itens, int capacidade) {
+    std::vector<bool> solucao(itens.size(), false);
+    std::vector<size_t> indices(itens.size());
+    std::iota(indices.begin(), indices.end(), 0);
+    
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(indices.begin(), indices.end(), g);
+
+    int pesoAtual = 0;
+    for (size_t i : indices) {
+        if (pesoAtual + itens[i].peso <= capacidade) {
+            solucao[i] = true;
+            pesoAtual += itens[i].peso;
+        }
     }
+    return solucao;
+}
 
-    // Não incluir o item atual
-    int valorSem = buscaExaustiva(itens, n, maxWeight, indice + 1, pesoAtual, valorAtual);
+// Implementação da heurística "Seleção Aleatória Baseada em Probabilidade"
+std::vector<bool> heuristicaProbabilistica(const std::vector<Item>& itens, int capacidade) {
+    std::vector<bool> solucao(itens.size(), false);
+    int pesoAtual = 0;
 
-    // Incluir o item atual, se possível
-    int valorCom = 0;
-    if (pesoAtual + itens[indice].peso <= maxWeight) {
-        valorCom = buscaExaustiva(itens, n, maxWeight, indice + 1, pesoAtual + itens[indice].peso, valorAtual + itens[indice].valor);
+    for (size_t i = 0; i < itens.size(); ++i) {
+        float probabilidade = static_cast<float>(rand()) / RAND_MAX;
+        if (probabilidade > 0.5 && (pesoAtual + itens[i].peso <= capacidade)) {
+            solucao[i] = true;
+            pesoAtual += itens[i].peso;
+        }
     }
+    return solucao;
+}
 
-    return std::max(valorSem, valorCom);
+// Implementação da estratégia Mochila Cheia
+std::vector<bool> mochilaCheia(const std::vector<Item>& itens, int capacidade) {
+    std::vector<bool> mochila(itens.size(), false);
+    int pesoAtual = 0;
+
+    for (size_t i = 0; i < itens.size(); ++i) {
+        if (pesoAtual + itens[i].peso <= capacidade) {
+            mochila[i] = true;
+            pesoAtual += itens[i].peso;
+        }
+    }
+    return mochila;
+}
+
+// Implementação da estratégia Substituição de Objeto
+std::vector<bool> substituicaoObjeto(std::vector<Item>& itens, int capacidade) {
+    std::vector<bool> solucao = geraSolucaoAleatoria(itens, capacidade);
+    solucao = mochilaCheia(itens, capacidade);
+
+    bool melhoria = true;
+    while (melhoria) {
+        melhoria = false;
+        for (size_t i = 0; i < itens.size(); ++i) {
+            if (solucao[i]) continue;
+
+            for (size_t j = 0; j < itens.size(); ++j) {
+                if (!solucao[j]) continue;
+
+                std::vector<bool> novaSolucao = solucao;
+                novaSolucao[j] = false;
+                novaSolucao[i] = true;
+
+                if (calculaPeso(itens, novaSolucao) <= capacidade &&
+                    calculaValor(itens, novaSolucao) > calculaValor(itens, solucao)) {
+                    solucao = novaSolucao;
+                    melhoria = true;
+                }
+            }
+        }
+    }
+    return solucao;
+}
+
+// Implementação da estratégia Hill Climbing
+std::vector<bool> hillClimbing(const std::vector<Item>& itens, int capacidade) {
+    std::vector<bool> solucao = geraSolucaoAleatoria(itens, capacidade);
+    
+    bool melhoria = true;
+    while (melhoria) {
+        melhoria = false;
+        for (size_t i = 0; i < itens.size(); ++i) {
+            std::vector<bool> vizinho = solucao;
+            vizinho[i] = !vizinho[i]; 
+
+            if (calculaPeso(itens, vizinho) <= capacidade &&
+                calculaValor(itens, vizinho) > calculaValor(itens, solucao)) {
+                solucao = vizinho;
+                melhoria = true;
+            }
+        }
+    }
+    return solucao;
+}
+
+// Função para ler os itens do arquivo de entrada
+std::vector<Item> lerEntrada(const std::string& nomeArquivo, int& capacidade) {
+    std::ifstream arquivo(nomeArquivo);
+    std::vector<Item> itens;
+    if (arquivo.is_open()) {
+        arquivo >> capacidade;
+        int peso, valor;
+        while (arquivo >> peso >> valor) {
+            itens.push_back({peso, valor});
+        }
+        arquivo.close();
+    } else {
+        std::cerr << "Erro ao abrir o arquivo: " << nomeArquivo << std::endl;
+    }
+    return itens;
 }
 
 int main() {
-    std::vector<std::string> arquivosEntrada = {"entrada1.txt", "entrada.txt", "entrada3.txt", "entrada4.txt"};
+    srand(time(0));
 
-    // Parâmetros das heurísticas
-    const int numExecucoes = 5;
-    const double threshold = 0.5;
+    // Lista de arquivos de entrada
+    std::vector<std::string> arquivos = {"entrada1.txt", "entrada2.txt", "entrada3.txt"};
+    
+    for (const std::string& nomeArquivo : arquivos) {
+        int capacidade;
+        std::vector<Item> itens = lerEntrada(nomeArquivo, capacidade);
 
-    for (const auto& arquivo : arquivosEntrada) {
-        std::vector<Item> itens;
-        int capacidadeMochila = 0;
+        std::cout << "Processando " << nomeArquivo << " com capacidade da mochila: " << capacidade << "\n";
 
-        std::cout << "Processando arquivo: " << arquivo << std::endl;
+        // Executar as heurísticas e estratégias
+        std::vector<bool> melhorSolucao;
+        int melhorValor = 0;
 
-        if (!lerItensDoArquivo(arquivo, itens, capacidadeMochila)) {
-            std::cerr << "Falha ao ler o arquivo: " << arquivo << ". Pulando para o próximo." << std::endl;
-            continue;
+        // Heurística 1: Embaralhar e Preencher a Mochila
+        std::vector<bool> solucaoEmbaralhar = heuristicaEmbaralhar(itens, capacidade);
+        int valorEmbaralhar = calculaValor(itens, solucaoEmbaralhar);
+        std::cout << "Valor Embaralhar: " << valorEmbaralhar << "\n";
+
+        // Heurística 2: Seleção Aleatória Baseada em Probabilidade
+        std::vector<bool> solucaoProbabilistica = heuristicaProbabilistica(itens, capacidade);
+        int valorProbabilistico = calculaValor(itens, solucaoProbabilistica);
+        std::cout << "Valor Probabilística: " << valorProbabilistico << "\n";
+
+        // Algoritmo 3: Mochila Cheia
+        std::vector<bool> solucaoCheia = mochilaCheia(itens, capacidade);
+        int valorCheia = calculaValor(itens, solucaoCheia);
+        std::cout << "Valor Mochila Cheia: " << valorCheia << "\n";
+
+        // Algoritmo 4: Substituição de Objeto
+        std::vector<bool> solucaoSubstituicao = substituicaoObjeto(itens, capacidade);
+        int valorSubstituicao = calculaValor(itens, solucaoSubstituicao);
+        std::cout << "Valor Substituição de Objeto: " << valorSubstituicao << "\n";
+
+        // Algoritmo 5: Hill Climbing
+        for (int i = 0; i < 10; ++i) {
+            std::vector<bool> solucaoHill = hillClimbing(itens, capacidade);
+            int valorHill = calculaValor(itens, solucaoHill);
+            if (valorHill > melhorValor) {
+                melhorValor = valorHill;
+                melhorSolucao = solucaoHill;
+            }
         }
-
-        std::cout << "Capacidade da Mochila: " << capacidadeMochila << std::endl;
-        std::cout << "Número de Itens: " << itens.size() << std::endl;
-
-        // 1. Busca Exaustiva
-        std::cout << "\n--- Busca Exaustiva ---" << std::endl;
-        auto start_exaustiva = std::chrono::high_resolution_clock::now();
-        int valorExaustivo = buscaExaustiva(itens, itens.size(), capacidadeMochila);
-        auto end_exaustiva = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> tempoExaustivo = end_exaustiva - start_exaustiva;
-        std::cout << "Valor Total (Exaustiva): " << valorExaustivo << std::endl;
-        std::cout << "Tempo de Execução (Exaustiva): " << tempoExaustivo.count() << " segundos" << std::endl;
-
-        // 2. Heurística 1: Embaralhar e Preencher a Mochila
-        std::cout << "\n--- Heurística 1: Embaralhar e Preencher a Mochila ---" << std::endl;
-        int melhorValorHeuristica1 = 0;
-        double tempoTotalHeuristica1 = 0.0;
-
-        for (int i = 0; i < numExecucoes; ++i) {
-            auto start = std::chrono::high_resolution_clock::now();
-            int valor = shuffleAndFillKnapsack(itens, capacidadeMochila);
-            auto end = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double> elapsed = end - start;
-
-            tempoTotalHeuristica1 += elapsed.count();
-            melhorValorHeuristica1 = std::max(melhorValorHeuristica1, valor);
-
-            std::cout << "Execução " << i + 1 << ": Valor = " << valor << ", Tempo = " << elapsed.count() << " segundos" << std::endl;
-        }
-        std::cout << "Melhor Valor Heurística 1: " << melhorValorHeuristica1 << std::endl;
-        std::cout << "Tempo Médio Heurística 1: " << tempoTotalHeuristica1 / numExecucoes << " segundos" << std::endl;
-
-        // 3. Heurística 2: Seleção Aleatória Baseada em Probabilidade
-        std::cout << "\n--- Heurística 2: Seleção Aleatória Baseada em Probabilidade ---" << std::endl;
-        int melhorValorHeuristica2 = 0;
-        double tempoTotalHeuristica2 = 0.0;
-
-        for (int i = 0; i < numExecucoes; ++i) {
-            auto start = std::chrono::high_resolution_clock::now();
-            int valor = probabilisticSelectionKnapsack(itens, capacidadeMochila, threshold);
-            auto end = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double> elapsed = end - start;
-
-            tempoTotalHeuristica2 += elapsed.count();
-            melhorValorHeuristica2 = std::max(melhorValorHeuristica2, valor);
-
-            std::cout << "Execução " << i + 1 << ": Valor = " << valor << ", Tempo = " << elapsed.count() << " segundos" << std::endl;
-        }
-        std::cout << "Melhor Valor Heurística 2: " << melhorValorHeuristica2 << std::endl;
-        std::cout << "Tempo Médio Heurística 2: " << tempoTotalHeuristica2 / numExecucoes << " segundos" << std::endl;
-
-        // Comparação
-        std::cout << "\n--- Comparação dos Métodos ---" << std::endl;
-        std::cout << "Valor Exaustivo: " << valorExaustivo << std::endl;
-        std::cout << "Melhor Valor Heurística 1: " << melhorValorHeuristica1 << std::endl;
-        std::cout << "Melhor Valor Heurística 2: " << melhorValorHeuristica2 << std::endl;
-
-        std::cout << "\nTempo Exaustivo: " << tempoExaustivo.count() << " segundos" << std::endl;
-        std::cout << "Tempo Médio Heurística 1: " << tempoTotalHeuristica1 / numExecucoes << " segundos" << std::endl;
-        std::cout << "Tempo Médio Heurística 2: " << tempoTotalHeuristica2 / numExecucoes << " segundos" << std::endl;
-
-        std::cout << "\n========================================\n" << std::endl;
+        std::cout << "Melhor valor Hill Climbing: " << melhorValor << "\n";
     }
 
     return 0;
