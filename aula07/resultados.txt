@@ -1,0 +1,230 @@
+Input File: entrada1.txt
+Number of Combinations: 24974
+Exhaustive Method Results:
+Total Value: 601
+Total Weight: 373
+Execution Time: 15117500 ns
+
+Shuffle and Fill Method - Iteration 1:
+Total Value: 288
+Total Weight: 380
+Execution Time: 500 ns
+
+Shuffle and Fill Method - Iteration 2:
+Total Value: 251
+Total Weight: 379
+Execution Time: 600 ns
+
+Shuffle and Fill Method - Iteration 3:
+Total Value: 394
+Total Weight: 367
+Execution Time: 300 ns
+
+Shuffle and Fill Method - Iteration 4:
+Total Value: 235
+Total Weight: 366
+Execution Time: 500 ns
+
+Shuffle and Fill Method - Iteration 5:
+Total Value: 311
+Total Weight: 373
+Execution Time: 300 ns
+
+Random Selection Method - Iteration 1:
+Total Value: 315
+Total Weight: 374
+Execution Time: 3000 ns
+
+Random Selection Method - Iteration 2:
+Total Value: 290
+Total Weight: 365
+Execution Time: 3000 ns
+
+Random Selection Method - Iteration 3:
+Total Value: 273
+Total Weight: 372
+Execution Time: 3700 ns
+
+Random Selection Method - Iteration 4:
+Total Value: 343
+Total Weight: 375
+Execution Time: 12500 ns
+
+Random Selection Method - Iteration 5:
+Total Value: 328
+Total Weight: 380
+Execution Time: 2800 ns
+
+--------------------------------------------------
+Input File: entrada2.txt
+Number of Combinations: 27638
+Exhaustive Method Results:
+Total Value: 870
+Total Weight: 239
+Execution Time: 8691800 ns
+
+Shuffle and Fill Method - Iteration 1:
+Total Value: 282
+Total Weight: 234
+Execution Time: 500 ns
+
+Shuffle and Fill Method - Iteration 2:
+Total Value: 232
+Total Weight: 238
+Execution Time: 700 ns
+
+Shuffle and Fill Method - Iteration 3:
+Total Value: 254
+Total Weight: 236
+Execution Time: 600 ns
+
+Shuffle and Fill Method - Iteration 4:
+Total Value: 305
+Total Weight: 233
+Execution Time: 800 ns
+
+Shuffle and Fill Method - Iteration 5:
+Total Value: 478
+Total Weight: 236
+Execution Time: 600 ns
+
+Random Selection Method - Iteration 1:
+Total Value: 192
+Total Weight: 235
+Execution Time: 5100 ns
+
+Random Selection Method - Iteration 2:
+Total Value: 357
+Total Weight: 236
+Execution Time: 8300 ns
+
+Random Selection Method - Iteration 3:
+Total Value: 402
+Total Weight: 236
+Execution Time: 4300 ns
+
+Random Selection Method - Iteration 4:
+Total Value: 388
+Total Weight: 237
+Execution Time: 4200 ns
+
+Random Selection Method - Iteration 5:
+Total Value: 217
+Total Weight: 239
+Execution Time: 4100 ns
+
+--------------------------------------------------
+Input File: entrada3.txt
+Number of Combinations: 26479
+Exhaustive Method Results:
+Total Value: 3320
+Total Weight: 405
+Execution Time: 8103600 ns
+
+Shuffle and Fill Method - Iteration 1:
+Total Value: 3320
+Total Weight: 405
+Execution Time: 700 ns
+
+Shuffle and Fill Method - Iteration 2:
+Total Value: 3320
+Total Weight: 405
+Execution Time: 1000 ns
+
+Shuffle and Fill Method - Iteration 3:
+Total Value: 3320
+Total Weight: 405
+Execution Time: 700 ns
+
+Shuffle and Fill Method - Iteration 4:
+Total Value: 3320
+Total Weight: 405
+Execution Time: 700 ns
+
+Shuffle and Fill Method - Iteration 5:
+Total Value: 3320
+Total Weight: 405
+Execution Time: 1100 ns
+
+Random Selection Method - Iteration 1:
+Total Value: 1553
+Total Weight: 184
+Execution Time: 4000 ns
+
+Random Selection Method - Iteration 2:
+Total Value: 1382
+Total Weight: 176
+Execution Time: 4000 ns
+
+Random Selection Method - Iteration 3:
+Total Value: 1739
+Total Weight: 210
+Execution Time: 7500 ns
+
+Random Selection Method - Iteration 4:
+Total Value: 1243
+Total Weight: 144
+Execution Time: 4700 ns
+
+Random Selection Method - Iteration 5:
+Total Value: 1686
+Total Weight: 187
+Execution Time: 3800 ns
+
+--------------------------------------------------
+Input File: entrada4.txt
+Number of Combinations: 21254
+Exhaustive Method Results:
+Total Value: 648
+Total Weight: 600
+Execution Time: 6141100 ns
+
+Shuffle and Fill Method - Iteration 1:
+Total Value: 511
+Total Weight: 598
+Execution Time: 400 ns
+
+Shuffle and Fill Method - Iteration 2:
+Total Value: 538
+Total Weight: 599
+Execution Time: 400 ns
+
+Shuffle and Fill Method - Iteration 3:
+Total Value: 584
+Total Weight: 596
+Execution Time: 500 ns
+
+Shuffle and Fill Method - Iteration 4:
+Total Value: 509
+Total Weight: 600
+Execution Time: 400 ns
+
+Shuffle and Fill Method - Iteration 5:
+Total Value: 499
+Total Weight: 596
+Execution Time: 400 ns
+
+Random Selection Method - Iteration 1:
+Total Value: 361
+Total Weight: 424
+Execution Time: 1900 ns
+
+Random Selection Method - Iteration 2:
+Total Value: 365
+Total Weight: 400
+Execution Time: 2300 ns
+
+Random Selection Method - Iteration 3:
+Total Value: 431
+Total Weight: 517
+Execution Time: 2000 ns
+
+Random Selection Method - Iteration 4:
+Total Value: 364
+Total Weight: 505
+Execution Time: 2300 ns
+
+Random Selection Method - Iteration 5:
+Total Value: 281
+Total Weight: 342
+Execution Time: 1900 ns
