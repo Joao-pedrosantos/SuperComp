@@ -1,218 +1,223 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <chrono>
 #include <algorithm>
-#include <cstdlib>
-#include <ctime>
-#include <string>
 #include <random>
+#include <numeric>
+#include <unordered_map>
+#include <climits>
 
-// Definição de uma estrutura para armazenar os itens
-struct Item {
-    int peso;
-    int valor;
-};
+using namespace std;
+using namespace chrono;
 
-// Função para calcular o valor total dos itens na mochila
-int calculaValor(const std::vector<Item>& itens, const std::vector<bool>& mochila) {
-    int valorTotal = 0;
-    for (size_t i = 0; i < itens.size(); ++i) {
-        if (mochila[i]) {
-            valorTotal += itens[i].valor;
-        }
+typedef pair<int, int> Result;
+unordered_map<int, Result> memoTable;
+
+Result computeMaxValue(int remainingCapacity, const vector<int>& itemWeights, const vector<int>& itemValues, int currentItemIndex, int& numCombinations) {
+    numCombinations++;
+    if (currentItemIndex == 0 || remainingCapacity == 0) return {0, 0};
+    int memoKey = remainingCapacity * 1000 + currentItemIndex;
+
+    if (memoTable.find(memoKey) != memoTable.end()) return memoTable[memoKey];
+
+    Result result;
+    if (itemWeights[currentItemIndex - 1] > remainingCapacity) {
+        result = computeMaxValue(remainingCapacity, itemWeights, itemValues, currentItemIndex - 1, numCombinations);
+    } else {
+        Result includeItem = computeMaxValue(remainingCapacity - itemWeights[currentItemIndex - 1], itemWeights, itemValues, currentItemIndex - 1, numCombinations);
+        includeItem.first += itemValues[currentItemIndex - 1];
+        includeItem.second += itemWeights[currentItemIndex - 1];
+        Result excludeItem = computeMaxValue(remainingCapacity, itemWeights, itemValues, currentItemIndex - 1, numCombinations);
+        result = (includeItem.first > excludeItem.first) ? includeItem : excludeItem;
     }
-    return valorTotal;
+    memoTable[memoKey] = result;
+    return result;
 }
 
-// Função para calcular o peso total dos itens na mochila
-int calculaPeso(const std::vector<Item>& itens, const std::vector<bool>& mochila) {
-    int pesoTotal = 0;
-    for (size_t i = 0; i < itens.size(); ++i) {
-        if (mochila[i]) {
-            pesoTotal += itens[i].peso;
-        }
+void displayResults(const string& method, int totalValue, int totalWeight, long long execTime, int iteration = 0) {
+    if (iteration == 0) {
+        cout << method << " Results:" << endl;
+    } else {
+        cout << method << " - Iteration " << iteration << ":" << endl;
     }
-    return pesoTotal;
+    cout << "Total Value: " << totalValue << endl;
+    cout << "Total Weight: " << totalWeight << endl;
+    cout << "Execution Time: " << execTime << " ns" << endl << endl;
 }
 
-// Função para gerar uma solução aleatória
-std::vector<bool> geraSolucaoAleatoria(const std::vector<Item>& itens, int capacidade) {
-    std::vector<bool> solucao(itens.size(), false);
-    int pesoAtual = 0;
+void shuffleAndFill(int knapsackCapacity, vector<int>& weights, vector<int>& values, mt19937& generator) {
+    for (int i = 0; i < 5; ++i) {
+        shuffle(weights.begin(), weights.end(), generator);
+        shuffle(values.begin(), values.end(), generator);
+        int currentWeight = 0, totalValue = 0;
 
-    for (size_t i = 0; i < itens.size(); ++i) {
-        if (pesoAtual + itens[i].peso <= capacidade) {
-            solucao[i] = (rand() % 2 == 1); // Escolhe aleatoriamente se o item será incluído
-            if (solucao[i]) {
-                pesoAtual += itens[i].peso;
+        auto startTime = high_resolution_clock::now();
+
+        for (int j = 0; j < weights.size(); ++j) {
+            if (currentWeight + weights[j] <= knapsackCapacity) {
+                currentWeight += weights[j];
+                totalValue += values[j];
             }
         }
+
+        auto endTime = high_resolution_clock::now();
+        auto duration = duration_cast<nanoseconds>(endTime - startTime).count();
+
+        displayResults("Shuffle and Fill Method", totalValue, currentWeight, duration, i + 1);
     }
-    return solucao;
 }
 
-// Implementação da heurística "Embaralhar e Preencher a Mochila"
-std::vector<bool> heuristicaEmbaralhar(const std::vector<Item>& itens, int capacidade) {
-    std::vector<bool> solucao(itens.size(), false);
-    std::vector<size_t> indices(itens.size());
-    std::iota(indices.begin(), indices.end(), 0);
-    
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(indices.begin(), indices.end(), g);
+void randomSelection(int knapsackCapacity, vector<int>& weights, vector<int>& values, mt19937& generator) {
+    uniform_int_distribution<int> distribution(0, weights.size() - 1);
+    for (int i = 0; i < 5; ++i) {
+        int currentWeight = 0, totalValue = 0;
 
-    int pesoAtual = 0;
-    for (size_t i : indices) {
-        if (pesoAtual + itens[i].peso <= capacidade) {
-            solucao[i] = true;
-            pesoAtual += itens[i].peso;
+        auto startTime = high_resolution_clock::now();
+
+        for (int j = 0; j < weights.size(); ++j) {
+            if (distribution(generator) % 2 == 0 && currentWeight + weights[j] <= knapsackCapacity) {
+                currentWeight += weights[j];
+                totalValue += values[j];
+            }
+        }
+
+        auto endTime = high_resolution_clock::now();
+        auto duration = duration_cast<nanoseconds>(endTime - startTime).count();
+
+        displayResults("Random Selection Method", totalValue, currentWeight, duration, i + 1);
+    }
+}
+
+// Hill Climbing Method
+void hillClimbing(int knapsackCapacity, vector<int>& weights, vector<int>& values, mt19937& generator) {
+    // Hill Climbing starts with a random solution and iteratively improves
+    vector<int> currentSolution(weights.size(), 0);  // Start with an empty knapsack
+    int currentWeight = 0;
+    int currentValue = 0;
+
+    // Random initialization
+    for (int i = 0; i < weights.size(); ++i) {
+        if (weights[i] + currentWeight <= knapsackCapacity) {
+            currentSolution[i] = 1;  // Include item in the knapsack
+            currentWeight += weights[i];
+            currentValue += values[i];
         }
     }
-    return solucao;
-}
 
-// Implementação da heurística "Seleção Aleatória Baseada em Probabilidade"
-std::vector<bool> heuristicaProbabilistica(const std::vector<Item>& itens, int capacidade) {
-    std::vector<bool> solucao(itens.size(), false);
-    int pesoAtual = 0;
+    // Perform hill climbing for a fixed number of iterations
+    uniform_int_distribution<int> distribution(0, weights.size() - 1);
+    auto startTime = high_resolution_clock::now();
 
-    for (size_t i = 0; i < itens.size(); ++i) {
-        float probabilidade = static_cast<float>(rand()) / RAND_MAX;
-        if (probabilidade > 0.5 && (pesoAtual + itens[i].peso <= capacidade)) {
-            solucao[i] = true;
-            pesoAtual += itens[i].peso;
+    for (int iteration = 0; iteration < 1000; ++iteration) {
+        // Randomly select an item to try and flip (include/exclude)
+        int randomIndex = distribution(generator);
+
+        if (currentSolution[randomIndex] == 1) {
+            // Try removing the item
+            currentWeight -= weights[randomIndex];
+            currentValue -= values[randomIndex];
+            currentSolution[randomIndex] = 0;
+        } else if (currentWeight + weights[randomIndex] <= knapsackCapacity) {
+            // Try adding the item
+            currentWeight += weights[randomIndex];
+            currentValue += values[randomIndex];
+            currentSolution[randomIndex] = 1;
         }
+
+        // Terminate early if no improvement can be made
+        if (currentWeight > knapsackCapacity) break;
     }
-    return solucao;
+
+    auto endTime = high_resolution_clock::now();
+    auto duration = duration_cast<nanoseconds>(endTime - startTime).count();
+
+    displayResults("Hill Climbing", currentValue, currentWeight, duration);
 }
 
-// Implementação da estratégia Mochila Cheia
-std::vector<bool> mochilaCheia(const std::vector<Item>& itens, int capacidade) {
-    std::vector<bool> mochila(itens.size(), false);
-    int pesoAtual = 0;
+// Object Substitution Method
+void objectSubstitution(int knapsackCapacity, vector<int>& weights, vector<int>& values) {
+    // Object Substitution swaps out items if needed to optimize
+    vector<int> currentSolution(weights.size(), 0);
+    int currentWeight = 0;
+    int currentValue = 0;
 
-    for (size_t i = 0; i < itens.size(); ++i) {
-        if (pesoAtual + itens[i].peso <= capacidade) {
-            mochila[i] = true;
-            pesoAtual += itens[i].peso;
-        }
-    }
-    return mochila;
-}
-
-// Implementação da estratégia Substituição de Objeto
-std::vector<bool> substituicaoObjeto(std::vector<Item>& itens, int capacidade) {
-    std::vector<bool> solucao = geraSolucaoAleatoria(itens, capacidade);
-    solucao = mochilaCheia(itens, capacidade);
-
-    bool melhoria = true;
-    while (melhoria) {
-        melhoria = false;
-        for (size_t i = 0; i < itens.size(); ++i) {
-            if (solucao[i]) continue;
-
-            for (size_t j = 0; j < itens.size(); ++j) {
-                if (!solucao[j]) continue;
-
-                std::vector<bool> novaSolucao = solucao;
-                novaSolucao[j] = false;
-                novaSolucao[i] = true;
-
-                if (calculaPeso(itens, novaSolucao) <= capacidade &&
-                    calculaValor(itens, novaSolucao) > calculaValor(itens, solucao)) {
-                    solucao = novaSolucao;
-                    melhoria = true;
+    for (int i = 0; i < weights.size(); ++i) {
+        if (weights[i] + currentWeight <= knapsackCapacity) {
+            currentSolution[i] = 1;  // Include the item
+            currentWeight += weights[i];
+            currentValue += values[i];
+        } else {
+            // Find the least valuable item in the knapsack
+            int minValue = INT_MAX;
+            int minIndex = -1;
+            for (int j = 0; j < weights.size(); ++j) {
+                if (currentSolution[j] == 1 && values[j] < minValue) {
+                    minValue = values[j];
+                    minIndex = j;
                 }
             }
-        }
-    }
-    return solucao;
-}
 
-// Implementação da estratégia Hill Climbing
-std::vector<bool> hillClimbing(const std::vector<Item>& itens, int capacidade) {
-    std::vector<bool> solucao = geraSolucaoAleatoria(itens, capacidade);
-    
-    bool melhoria = true;
-    while (melhoria) {
-        melhoria = false;
-        for (size_t i = 0; i < itens.size(); ++i) {
-            std::vector<bool> vizinho = solucao;
-            vizinho[i] = !vizinho[i]; 
-
-            if (calculaPeso(itens, vizinho) <= capacidade &&
-                calculaValor(itens, vizinho) > calculaValor(itens, solucao)) {
-                solucao = vizinho;
-                melhoria = true;
+            // Attempt to substitute if it improves value
+            if (minIndex != -1 && values[i] > minValue && 
+                currentWeight - weights[minIndex] + weights[i] <= knapsackCapacity) {
+                currentWeight = currentWeight - weights[minIndex] + weights[i];
+                currentValue = currentValue - values[minIndex] + values[i];
+                currentSolution[minIndex] = 0;
+                currentSolution[i] = 1;
             }
         }
     }
-    return solucao;
-}
 
-// Função para ler os itens do arquivo de entrada
-std::vector<Item> lerEntrada(const std::string& nomeArquivo, int& capacidade) {
-    std::ifstream arquivo(nomeArquivo);
-    std::vector<Item> itens;
-    if (arquivo.is_open()) {
-        arquivo >> capacidade;
-        int peso, valor;
-        while (arquivo >> peso >> valor) {
-            itens.push_back({peso, valor});
-        }
-        arquivo.close();
-    } else {
-        std::cerr << "Erro ao abrir o arquivo: " << nomeArquivo << std::endl;
-    }
-    return itens;
+    auto startTime = high_resolution_clock::now();
+    auto endTime = high_resolution_clock::now();
+    auto duration = duration_cast<nanoseconds>(endTime - startTime).count();
+
+    displayResults("Object Substitution", currentValue, currentWeight, duration);
 }
 
 int main() {
-    srand(time(0));
+    vector<string> inputFiles = {"entrada1.txt", "entrada2.txt", "entrada3.txt"};
 
-    // Lista de arquivos de entrada
-    std::vector<std::string> arquivos = {"entrada1.txt", "entrada2.txt", "entrada3.txt"};
-    
-    for (const std::string& nomeArquivo : arquivos) {
-        int capacidade;
-        std::vector<Item> itens = lerEntrada(nomeArquivo, capacidade);
-
-        std::cout << "Processando " << nomeArquivo << " com capacidade da mochila: " << capacidade << "\n";
-
-        // Executar as heurísticas e estratégias
-        std::vector<bool> melhorSolucao;
-        int melhorValor = 0;
-
-        // Heurística 1: Embaralhar e Preencher a Mochila
-        std::vector<bool> solucaoEmbaralhar = heuristicaEmbaralhar(itens, capacidade);
-        int valorEmbaralhar = calculaValor(itens, solucaoEmbaralhar);
-        std::cout << "Valor Embaralhar: " << valorEmbaralhar << "\n";
-
-        // Heurística 2: Seleção Aleatória Baseada em Probabilidade
-        std::vector<bool> solucaoProbabilistica = heuristicaProbabilistica(itens, capacidade);
-        int valorProbabilistico = calculaValor(itens, solucaoProbabilistica);
-        std::cout << "Valor Probabilística: " << valorProbabilistico << "\n";
-
-        // Algoritmo 3: Mochila Cheia
-        std::vector<bool> solucaoCheia = mochilaCheia(itens, capacidade);
-        int valorCheia = calculaValor(itens, solucaoCheia);
-        std::cout << "Valor Mochila Cheia: " << valorCheia << "\n";
-
-        // Algoritmo 4: Substituição de Objeto
-        std::vector<bool> solucaoSubstituicao = substituicaoObjeto(itens, capacidade);
-        int valorSubstituicao = calculaValor(itens, solucaoSubstituicao);
-        std::cout << "Valor Substituição de Objeto: " << valorSubstituicao << "\n";
-
-        // Algoritmo 5: Hill Climbing
-        for (int i = 0; i < 10; ++i) {
-            std::vector<bool> solucaoHill = hillClimbing(itens, capacidade);
-            int valorHill = calculaValor(itens, solucaoHill);
-            if (valorHill > melhorValor) {
-                melhorValor = valorHill;
-                melhorSolucao = solucaoHill;
-            }
+    for (const string& inputFileName : inputFiles) {
+        ifstream inputFile(inputFileName);
+        if (!inputFile) {
+            cerr << "Failed to open input file: " << inputFileName << endl;
+            continue;
         }
-        std::cout << "Melhor valor Hill Climbing: " << melhorValor << "\n";
+
+        int itemCount, knapsackCapacity;
+        inputFile >> itemCount >> knapsackCapacity;
+
+        vector<int> itemWeights(itemCount), itemValues(itemCount);
+        for (int i = 0; i < itemCount; ++i) {
+            inputFile >> itemWeights[i] >> itemValues[i];
+        }
+
+        // Clear the memoTable for each new input file
+        memoTable.clear();
+
+        mt19937 generator(random_device{}());
+        int numCombinations = 0;
+        auto start = high_resolution_clock::now();
+
+        auto result = computeMaxValue(knapsackCapacity, itemWeights, itemValues, itemCount, numCombinations);
+
+        auto end = high_resolution_clock::now();
+        long long totalExecTime = duration_cast<nanoseconds>(end - start).count();
+        
+        cout << "Input File: " << inputFileName << endl;
+        cout << "Number of Combinations: " << numCombinations << endl;
+
+        displayResults("Exhaustive Method", result.first, result.second, totalExecTime);
+
+        // Execute heuristics
+        shuffleAndFill(knapsackCapacity, itemWeights, itemValues, generator);
+        randomSelection(knapsackCapacity, itemWeights, itemValues, generator);
+        hillClimbing(knapsackCapacity, itemWeights, itemValues, generator);
+        objectSubstitution(knapsackCapacity, itemWeights, itemValues);
+
+        cout << "--------------------------------------------------" << endl;
     }
 
     return 0;
