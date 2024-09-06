@@ -1,0 +1,204 @@
+Input File: entrada1.txt
+Number of Combinations: 24974
+Exhaustive Method Results:
+Total Value: 601
+Total Weight: 373
+Execution Time: 16969966 ns
+
+Shuffle and Fill Method - Iteration 1:
+Total Value: 311
+Total Weight: 378
+Execution Time: 1327 ns
+
+Shuffle and Fill Method - Iteration 2:
+Total Value: 208
+Total Weight: 380
+Execution Time: 1327 ns
+
+Shuffle and Fill Method - Iteration 3:
+Total Value: 248
+Total Weight: 375
+Execution Time: 990 ns
+
+Shuffle and Fill Method - Iteration 4:
+Total Value: 290
+Total Weight: 373
+Execution Time: 1360 ns
+
+Shuffle and Fill Method - Iteration 5:
+Total Value: 347
+Total Weight: 370
+Execution Time: 1107 ns
+
+Random Selection Method - Iteration 1:
+Total Value: 291
+Total Weight: 374
+Execution Time: 6490 ns
+
+Random Selection Method - Iteration 2:
+Total Value: 321
+Total Weight: 378
+Execution Time: 6527 ns
+
+Random Selection Method - Iteration 3:
+Total Value: 306
+Total Weight: 379
+Execution Time: 6867 ns
+
+Random Selection Method - Iteration 4:
+Total Value: 320
+Total Weight: 362
+Execution Time: 6383 ns
+
+Random Selection Method - Iteration 5:
+Total Value: 367
+Total Weight: 363
+Execution Time: 6190 ns
+
+Hill Climbing Results:
+Total Value: 316
+Total Weight: 377
+Execution Time: 155437 ns
+
+Object Substitution Results:
+Total Value: 547
+Total Weight: 372
+Execution Time: 98 ns
+
+--------------------------------------------------
+Input File: entrada2.txt
+Number of Combinations: 27638
+Exhaustive Method Results:
+Total Value: 870
+Total Weight: 239
+Execution Time: 15655807 ns
+
+Shuffle and Fill Method - Iteration 1:
+Total Value: 237
+Total Weight: 237
+Execution Time: 1082 ns
+
+Shuffle and Fill Method - Iteration 2:
+Total Value: 265
+Total Weight: 238
+Execution Time: 1026 ns
+
+Shuffle and Fill Method - Iteration 3:
+Total Value: 220
+Total Weight: 235
+Execution Time: 964 ns
+
+Shuffle and Fill Method - Iteration 4:
+Total Value: 189
+Total Weight: 237
+Execution Time: 1015 ns
+
+Shuffle and Fill Method - Iteration 5:
+Total Value: 235
+Total Weight: 237
+Execution Time: 1023 ns
+
+Random Selection Method - Iteration 1:
+Total Value: 189
+Total Weight: 235
+Execution Time: 7080 ns
+
+Random Selection Method - Iteration 2:
+Total Value: 300
+Total Weight: 235
+Execution Time: 7748 ns
+
+Random Selection Method - Iteration 3:
+Total Value: 272
+Total Weight: 238
+Execution Time: 8451 ns
+
+Random Selection Method - Iteration 4:
+Total Value: 331
+Total Weight: 238
+Execution Time: 21409 ns
+
+Random Selection Method - Iteration 5:
+Total Value: 324
+Total Weight: 239
+Execution Time: 7179 ns
+
+Hill Climbing Results:
+Total Value: 251
+Total Weight: 207
+Execution Time: 93972 ns
+
+Object Substitution Results:
+Total Value: 416
+Total Weight: 237
+Execution Time: 94 ns
+
+--------------------------------------------------
+Input File: entrada3.txt
+Number of Combinations: 21254
+Exhaustive Method Results:
+Total Value: 648
+Total Weight: 600
+Execution Time: 9547762 ns
+
+Shuffle and Fill Method - Iteration 1:
+Total Value: 445
+Total Weight: 598
+Execution Time: 796 ns
+
+Shuffle and Fill Method - Iteration 2:
+Total Value: 497
+Total Weight: 595
+Execution Time: 764 ns
+
+Shuffle and Fill Method - Iteration 3:
+Total Value: 565
+Total Weight: 600
+Execution Time: 725 ns
+
+Shuffle and Fill Method - Iteration 4:
+Total Value: 559
+Total Weight: 595
+Execution Time: 874 ns
+
+Shuffle and Fill Method - Iteration 5:
+Total Value: 553
+Total Weight: 588
+Execution Time: 762 ns
+
+Random Selection Method - Iteration 1:
+Total Value: 477
+Total Weight: 592
+Execution Time: 4416 ns
+
+Random Selection Method - Iteration 2:
+Total Value: 390
+Total Weight: 594
+Execution Time: 3776 ns
+
+Random Selection Method - Iteration 3:
+Total Value: 314
+Total Weight: 363
+Execution Time: 3874 ns
+
+Random Selection Method - Iteration 4:
+Total Value: 447
+Total Weight: 596
+Execution Time: 3811 ns
+
+Random Selection Method - Iteration 5:
+Total Value: 348
+Total Weight: 556
+Execution Time: 3919 ns
+
+Hill Climbing Results:
+Total Value: 407
+Total Weight: 491
+Execution Time: 150643 ns
+
+Object Substitution Results:
+Total Value: 590
+Total Weight: 593
+Execution Time: 92 ns
+
+--------------------------------------------------
