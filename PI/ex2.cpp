@@ -2,37 +2,45 @@
 #include <vector>
 #include <chrono>
 
-// Função recursiva que verifica se existe um subconjunto cuja soma seja igual a 'sum'
-bool subsetSumRecursive(const std::vector<int>& set, int n, int sum) {
-    // Caso base: se a soma é 0, encontramos o subconjunto
-    if (sum == 0) return true;
+bool subsetSum(const std::vector<int>& set, int sum) {
+    int n = set.size();
+    bool dp[n + 1][sum + 1];
 
-    // Caso base: se não há mais elementos e a soma não foi atingida, não há solução
-    if (n == 0 && sum != 0) return false;
+    // Inicialização da tabela DP
+    for (int i = 0; i <= n; i++) {
+        dp[i][0] = true; // Subconjunto vazio tem soma 0
+    }
+    for (int s = 1; s <= sum; s++) {
+        dp[0][s] = false; // Sem elementos, não há como formar uma soma diferente de 0
+    }
 
-    // Se o último elemento for maior que a soma, ignorá-lo
-    if (set[n - 1] > sum) return subsetSumRecursive(set, n - 1, sum);
+    // Preenchendo a tabela DP
+    for (int i = 1; i <= n; i++) {
+        for (int s = 1; s <= sum; s++) {
+            if (set[i - 1] > s) {
+                dp[i][s] = dp[i - 1][s]; // Não incluir o elemento
+            } else {
+                dp[i][s] = dp[i - 1][s] || dp[i - 1][s - set[i - 1]]; // Incluir ou não incluir o elemento
+            }
+        }
+    }
 
-    // Verificar dois casos:
-    // 1. Incluir o último elemento
-    // 2. Não incluir o último elemento
-    return subsetSumRecursive(set, n - 1, sum) ||
-           subsetSumRecursive(set, n - 1, sum - set[n - 1]);
+    return dp[n][sum];
 }
 
 int main() {
     // Definindo 10 cenários de teste
     std::vector<std::vector<int>> test_cases = {
         {1, 2, 3, 4},                    // Pequeno
-        {5, 7, 12, 1, 2},                // Pequeno
-        {10, 20, 15, 30},                // Pequeno
-        {20, 15, 10, 5, 30},             // Pequeno
+        {5, 7, 12, 1},                // Pequeno
+        {10, 20, 15},                // Pequeno
+        {20, 15, 10, 5},             // Pequeno
         {2, 3, 7, 8, 10},                // Médio
-        {12, 45, 78, 98, 123},           // Médio
-        {15, 30, 45, 60, 90},            // Médio
+        {12, 45, 78, 98, 123, 54},           // Médio
+        {15, 30, 45, 60, 90, 65, 4, 20},            // Médio
         {100, 200, 150, 50, 75, 25},     // Médio
-        {500, 1000, 750, 125, 250},      // Grande
-        {1000, 2000, 1500, 500, 10000, 1200, 4500, 8000},  // Grande
+        {500, 1000, 750, 125, 250, 120, 800, 500, 300, 625, 950},      // Grande
+        {1000, 2000, 1500, 500, 10000, 1200, 4500, 8000, 1250, 1450, 1650},  // Grande
     };
 
     // Alvo de soma para cada cenário
@@ -47,7 +55,7 @@ int main() {
         // Medindo o tempo de execução
         auto start = std::chrono::high_resolution_clock::now();
         
-        bool found = subsetSumRecursive(set, n, sum);
+        bool found = subsetSum(set, sum);
         
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> duration = end - start;
@@ -59,3 +67,4 @@ int main() {
 
     return 0;
 }
+
