@@ -1,6 +1,13 @@
+Padrão:
+
 N: 100000
 Estimativa de Pi: 3.14472
 Tempo de execução: 0.00347322 segundos
+
+
+N: 1000000
+Estimativa de Pi: 3.14012
+Tempo de execução: 0.0254852 segundos
 
 
 N: 10000000
@@ -43,6 +50,9 @@ Estimativa de Pi (paralela com gerador adequado): 2.59525
 Tempo de execução: 85.6529 segundos
 
 
+N: 1000000000
+Não consegue rodar dentro do tempo limite do cluster.
+
 =================================================================
 Melhor
 
@@ -55,6 +65,14 @@ N: 1000000
 Estimativa de Pi (com gerador por thread): 3.14365
 Tempo de execução: 0.0273722 segundos
 
+
+N: 10000000
+Estimativa de Pi (com gerador por thread): 3.14129
+Tempo de execução: 0.266313 segundos
+
+N: 100000000
+Estimativa de Pi (com gerador por thread): 3.1416
+Tempo de execução: 2.63258 segundos
 
 N: 1000000000
 Estimativa de Pi (com gerador por thread): 3.14164
