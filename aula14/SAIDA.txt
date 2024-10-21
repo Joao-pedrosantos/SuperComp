@@ -1,0 +1,3 @@
+N: 100000000
+Estimativa de Pi (com gerador por thread): 3.14157
+Tempo de execução: 2.63763 segundos

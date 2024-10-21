@@ -1,0 +1,61 @@
+N: 100000
+Estimativa de Pi: 3.14472
+Tempo de execução: 0.00347322 segundos
+
+
+N: 10000000
+Estimativa de Pi: 3.14196
+Tempo de execução: 0.308633 segundos
+
+
+N: 100000000
+Estimativa de Pi: 3.14176
+Tempo de execução: 2.07477 segundos
+
+
+N: 1000000000
+Estimativa de Pi: 3.14159
+Tempo de execução: 25.2802 segundos
+
+
+
+====================================================================
+Paralelo:
+
+
+N: 100000
+Estimativa de Pi (paralela com gerador adequado): 3
+Tempo de execução: 0.0780163 segundos
+
+
+N: 1000000
+Estimativa de Pi (paralela com gerador adequado): 2.5
+Tempo de execução: 0.759647 segundos
+
+
+N: 10000000
+Estimativa de Pi (paralela com gerador adequado): 2.70356
+Tempo de execução: 7.54156 segundos
+
+
+N: 100000000
+Estimativa de Pi (paralela com gerador adequado): 2.59525
+Tempo de execução: 85.6529 segundos
+
+
+=================================================================
+Melhor
+
+N: 100000
+Estimativa de Pi (com gerador por thread): 3.14436
+Tempo de execução: 0.00290716 segundos
+
+
+N: 1000000
+Estimativa de Pi (com gerador por thread): 3.14365
+Tempo de execução: 0.0273722 segundos
+
+
+N: 1000000000
+Estimativa de Pi (com gerador por thread): 3.14164
+Tempo de execução: 26.3237 segundos
