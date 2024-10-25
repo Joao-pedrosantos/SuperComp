@@ -1,0 +1,50 @@
+Processo 1 recebeu: Olá do processo 0
+Processo 1 enviou: Oi para o processo 0
+Processo 0 enviou: Olá para o processo 1
+Processo 0 recebeu: Oi do processo 1
+=================================
+Processo 0 enviou: Mensagem do processo 0 para o processo 1
+Processo 0 recebeu: Mensagem do processo 3 do processo 3
+Processo 1 recebeu: Mensagem do processo 0 do processo 0
+Processo 1 enviou: Mensagem do processo 1 para o processo 2
+Processo 2 recebeu: Mensagem do processo 1 do processo 1
+Processo 2 enviou: Mensagem do processo 2 para o processo 3
+Processo 3 recebeu: Mensagem do processo 2 do processo 2
+Processo 3 enviou: Mensagem do processo 3 para o processo 0
+=================================
+Processo 0 enviou: Mensagem inicial para o processo 1
+Processo 1 recebeu: Mensagem inicial do processo 0
+Processo 1 enviou: Mensagem inicial para o processo 2
+Processo 2 recebeu: Mensagem inicial do processo 1
+Processo 2 enviou: Mensagem inicial para o processo 3
+Processo 3 recebeu: Mensagem inicial do processo 2
+Processo 3 exibe a mensagem: Mensagem inicial
+=================================
+Processo 0 enviou: Mensagem para o processo 1 para o processo 1
+Processo 0 enviou: Mensagem para o processo 2 para o processo 2
+Processo 0 enviou: Mensagem para o processo 3 para o processo 3
+Processo 1 recebeu: Mensagem para o processo 1
+Processo 3 recebeu: Mensagem para o processo 3
+Processo 2 recebeu: Mensagem para o processo 2
+=================================
+Processo 0 enviou soma parcial 1 para o processo 1
+Processo 1 recebeu soma parcial 1 do processo 0
+Processo 1 soma seu valor 2 e envia soma parcial 3 para o processo 2
+Processo 2 recebeu soma parcial 3 do processo 1
+Processo 2 soma seu valor 3 e envia soma parcial 6 para o processo 3
+Processo 3 recebeu soma parcial 6 do processo 2
+Processo 3 soma seu valor 4 para obter soma total 10
+A soma total é 10
+=================================
+Processo 0 enviou: Mensagem para processo 1 para o processo 1
+Processo 0 recebeu: Resposta do processo 1 do processo 1
+Processo 0 enviou: Mensagem para processo 2 para o processo 2
+Processo 0 recebeu: Resposta do processo 2 do processo 2
+Processo 0 enviou: Mensagem para processo 3 para o processo 3
+Processo 0 recebeu: Resposta do processo 3 do processo 3
+Processo 1 recebeu: Mensagem para processo 1 do processo 0
+Processo 1 enviou: Resposta do processo 1 para o processo 0
+Processo 2 recebeu: Mensagem para processo 2 do processo 0
+Processo 2 enviou: Resposta do processo 2 para o processo 0
+Processo 3 recebeu: Mensagem para processo 3 do processo 0
+Processo 3 enviou: Resposta do processo 3 para o processo 0
