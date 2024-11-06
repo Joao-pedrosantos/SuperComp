@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr16.subst.fa:
+A: 20871252
+T: 21007375
+C: 16174512
+G: 16278731

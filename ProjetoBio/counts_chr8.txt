@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr8.subst.fa:
+A: 41199462
+T: 41128442
+C: 26596792
+G: 26570194

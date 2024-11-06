@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr10.subst.fa:
+A: 36997832
+T: 37039357
+C: 25425373
+G: 25417055

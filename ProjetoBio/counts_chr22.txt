@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr22.subst.fa:
+A: 8776181
+T: 8738261
+C: 7758796
+G: 7752671

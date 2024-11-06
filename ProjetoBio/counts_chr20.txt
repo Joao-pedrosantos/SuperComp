@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr20.subst.fa:
+A: 15935081
+T: 16153117
+C: 12170451
+G: 12207337

@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr7.subst.fa:
+A: 44360151
+T: 44415926
+C: 29477596
+G: 29442164

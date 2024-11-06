@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr4.subst.fa:
+A: 55867752
+T: 55878175
+C: 33405507
+G: 33422089

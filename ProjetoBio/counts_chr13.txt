@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr13.subst.fa:
+A: 28302226
+T: 28406778
+C: 17180726
+G: 17179219

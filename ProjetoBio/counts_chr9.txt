@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr9.subst.fa:
+A: 34033450
+T: 34005259
+C: 23111261
+G: 23098696

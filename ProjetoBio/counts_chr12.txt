@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr12.subst.fa:
+A: 37254175
+T: 37280600
+C: 24802004
+G: 24787035

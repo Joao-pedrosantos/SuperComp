@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr11.subst.fa:
+A: 36926066
+T: 36930948
+C: 25276826
+G: 25315890

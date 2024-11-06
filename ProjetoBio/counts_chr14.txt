@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr14.subst.fa:
+A: 25060765
+T: 25282413
+C: 16790929
+G: 16833734

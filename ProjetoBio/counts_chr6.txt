@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr6.subst.fa:
+A: 48777510
+T: 48754629
+C: 30877944
+G: 30903839

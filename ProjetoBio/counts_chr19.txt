@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr19.subst.fa:
+A: 13850505
+T: 13889615
+C: 12384102
+G: 12418013

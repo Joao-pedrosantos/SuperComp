@@ -1,0 +1,5 @@
+Contagem de bases no arquivo chr3.subst.fa:
+A: 56617656
+T: 56672399
+C: 36015980
+G: 36027177
