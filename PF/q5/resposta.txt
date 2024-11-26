@@ -1,0 +1,14 @@
+A
+Paralelismo é a prática de utilizar melhor os recursos do computador, como mais cores ou até GPU, para ter um maior desempenho. O processamento sequencial
+vai ter a mesma saída que o paralelo, mas, como ele pode ficar "preso" em um loop não otimizado, pode ser que demore muito mais para ter a saída.
+A utilização do paralelismo é importante especialmente quando é considerado escalabilidade, visto que quanto maior a quantidade de dados, mais tempo o código vai 
+ficar nos loops.
+Então, caso esteja trabalhando com dados pequenos, pode ser que nem tenha diferença paralelizando (ou até piore um pouco), mas assim que os dados ficam grandes, é muito
+mais rápido.
+
+B
+Não faz sentido atribuir cargas muito diferentes a cada core, já que isso só vai gerar um desbalanceamento no tempo de execução e, consequentemente, vai fazer com que
+alguns cores fiquem esperando os outros acabarem para poderem fazer uma outra task. Isso vai totalmente contra a ideia da pararelização dos códigos, porque faz o código
+ser mais lento e menos otimizado. 
+Para ter um equilibrio bom entre as cargas de trabalho, é possível dividir em partes iguais (caso seja um vetor), reescrever códigos mal otimizados, ver se todos os cores
+estão ocupados a todo momento entre outras. 
