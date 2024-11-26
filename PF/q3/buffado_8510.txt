@@ -1,0 +1,8 @@
+Media: 7.16667
+Maior valor: 14
+Produto: 1.11767e+09
+Tempo paralelizado: 22454 us
+Media: 7.16667
+Maior valor: 14
+Produto: 1.11767e+09
+Tempo sequencial: 3628 us
