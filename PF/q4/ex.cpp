@@ -94,8 +94,8 @@ int main(int argc, char* argv[]) {
     );
 
     if (rank == 0) {
-        double total_mean = std::accumulate(global_means.begin(), global_means.end(), 0.0) / tamanho;
-        std::cout << "Total Mean: " << total_mean << std::endl;
+        double media = std::accumulate(global_means.begin(), global_means.end(), 0.0) / tamanho;
+        std::cout << "Média: " << media << std::endl;
     }
 
     MPI_Finalize();
