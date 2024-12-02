@@ -1,5 +1,0 @@
-Contagem de bases no arquivo chr5.subst.fa:
-A: 51797301
-T: 51924365
-C: 32719838
-G: 32765414

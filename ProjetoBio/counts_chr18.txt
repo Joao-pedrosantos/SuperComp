@@ -1,5 +1,0 @@
-Contagem de bases no arquivo chr18.subst.fa:
-A: 21674187
-T: 21702278
-C: 13827701
-G: 13852599

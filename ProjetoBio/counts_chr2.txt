@@ -1,5 +1,0 @@
-Contagem de bases no arquivo chr2.subst.fa:
-A: 68601804
-T: 68745426
-C: 44657238
-G: 44693761

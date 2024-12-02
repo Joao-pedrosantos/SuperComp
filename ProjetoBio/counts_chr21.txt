@@ -1,5 +1,0 @@
-Contagem de bases no arquivo chr21.subst.fa:
-A: 10045514
-T: 9964161
-C: 6637887
-G: 6650030
