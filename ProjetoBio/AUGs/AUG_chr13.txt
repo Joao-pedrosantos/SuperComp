@@ -1,0 +1,2 @@
+Arquivo: RNA/RNA_chr13.txt
+Quantidade de 'AUG' encontrados: 1541070

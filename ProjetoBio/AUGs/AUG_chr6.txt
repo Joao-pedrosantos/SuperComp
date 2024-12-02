@@ -1,0 +1,2 @@
+Arquivo: RNA/RNA_chr6.txt
+Quantidade de 'AUG' encontrados: 2627874

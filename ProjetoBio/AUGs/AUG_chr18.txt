@@ -1,0 +1,2 @@
+Arquivo: RNA/RNA_chr18.txt
+Quantidade de 'AUG' encontrados: 1183593
